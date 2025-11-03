@@ -7,26 +7,35 @@ form {
   }
 
   form input {
-    flex: 1 1 10ch;
+    flex: 1 1 8ch;
     margin: 0.5rem;
   }
 
   form input[type="email"] {
-    flex: 3 1 30ch;
+    flex: 1 1 8ch;
   }
 
   form input,
   form button {
     width: 250px;
+    height: 38px;
     box-sizing: border-box;
+  }
+
+  form input[type="date"] {
+    appearance: none;
+    -webkit-appearance: none;
+    cursor:text ;
   }
 
   form button {
     border: 1px solid rgba(0, 0, 0, 0.2);
+    width: 100px;
     height: 38px;
     line-height: 38px;
     border-radius: 19px;
     font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
   }
 
   form #submit {
@@ -51,6 +60,22 @@ form {
     background: blue;
     color: white;
     box-shadow: 0 0.75rem 0.5rem -0.5rem hsl(0 50% 80%);
+  }
+
+  .row {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    justify-content: center;
+    max-width: 520px;
+  }
+
+  .row input {
+    flex: 1;
+    min-width: 0;
+    height: 38px;
+    padding: 0.5rem 0.75rem;
+    box-sizing: border-box;
   }
 
   .status {

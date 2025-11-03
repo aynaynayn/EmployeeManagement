@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="container">
-<h2>Record Attendance</h2>
+<h1>Record Attendance</h1>
 <form action="/attendance/add" method="post">
     <input type="text" name="employeeId" placeholder="employeeId" required>
     <input type="date" name="date" placeholder="date" required>

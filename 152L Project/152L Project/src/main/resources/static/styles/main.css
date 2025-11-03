@@ -18,11 +18,16 @@ body {
     color: #333;
   }
 
+a{
+    color: #807182;
+    text-decoration: none;
+}
+
   .container{
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6px;
+    gap: 10px;
     box-sizing: border-box;
     border-radius: 20px;
     padding: 40px;
