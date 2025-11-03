@@ -10,11 +10,11 @@
 <body>
 <h2>Add Employee</h2>
 <form action="/employees/add" method="post">
-    <input type="text" placeholder="Name" required><br>
-    <input type="email" placeholder="Email" required><br>
-    <input type="text" placeholder="Department" required><br>
-    <input type="text" placeholder="Position" required><br>
-    <input type="date" placeholder="Date Hired" required><br>
+    Name: <input type="text" name="name"><br>
+    Email: <input type="email" name="email"><br>
+    Department: <input type="text" name="department"><br>
+    Position: <input type="text" name="position"><br>
+    Date Hired: <input type="date" name="dateHired"><br>
     <button type="submit">Save</button>
 </form>
 <a href="/employees/list">Back to List</a>
