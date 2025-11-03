@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* View Department Styles - Glass Morphism Theme */
+
         :root {
             --primary-color: #3498db;
             --secondary-color: #2c3e50;
@@ -532,7 +532,7 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2023 Employee Management System. All rights reserved.</p>
+            <p>&copy; 2025 Employee Management System. All rights reserved.</p>
             <p>Streamlining workforce management for modern businesses</p>
         </div>
     </footer>

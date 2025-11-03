@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* view.css - Professional Employee Management System Styles */
+
 
         /* Global Styles */
         :root {
@@ -355,7 +355,7 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container text-center py-3">
-            <p class="mb-0">&copy; 2023 Employee Management System. All rights reserved.</p>
+            <p class="mb-0">&copy; 2025 Employee Management System. All rights reserved.</p>
         </div>
     </footer>
 

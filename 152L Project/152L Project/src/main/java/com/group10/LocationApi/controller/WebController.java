@@ -38,7 +38,7 @@ public class WebController {
         return false;
     }
 
-    // EMPLOYEES
+    // ========================= EMPLOYEES =========================
     @GetMapping("/employees/list")
     public String listEmployees(HttpSession session, Model model) {
         session.setAttribute("fromList", true);
@@ -48,8 +48,18 @@ public class WebController {
     }
 
     @GetMapping("/employees/add")
-    public String addEmployee(HttpSession session) {
-        return canAccess(session) ? "addEmployee" : "redirect:/employees/list";
+    public String addEmployee(Model model) {
+        List<Department> departments = departmentService.getAllDepartments();
+        model.addAttribute("departments", departments);
+        model.addAttribute("employee", new Employee());
+        return "addEmployee";
+    }
+
+
+    @PostMapping("/employees/add")
+    public String saveEmployee(@ModelAttribute Employee employee) {
+        employeeService.saveEmployee(employee);
+        return "redirect:/employees/list";
     }
 
     @GetMapping("/employees/edit/{id}")
@@ -57,22 +67,11 @@ public class WebController {
         if (!canAccess(session)) return "redirect:/employees/list";
 
         Employee employee = employeeService.getEmployeeById(id);
-        System.out.println("Employee fetched for edit: " + employee);  // debug
-        System.out.println("Date Hired: " + employee.getDateHired());  // debug
-
         List<Department> departments = departmentService.getAllDepartments();
-        System.out.println("Departments: " + departments);  // debug
 
         model.addAttribute("employee", employee);
         model.addAttribute("departments", departments);
         return "editEmployee";
-    }
-
-
-
-    @GetMapping("/employees/view")
-    public String viewEmployee(HttpSession session) {
-        return canAccess(session) ? "viewEmployee" : "redirect:/employees/list";
     }
 
     @PostMapping("/employees/update/{id}")
@@ -81,7 +80,24 @@ public class WebController {
         return "redirect:/employees/list";
     }
 
-    // DEPARTMENTS
+    @GetMapping("/employees/view")
+    public String viewEmployee(HttpSession session) {
+        return canAccess(session) ? "viewEmployee" : "redirect:/employees/list";
+    }
+
+    @GetMapping("/employees/view/{id}")
+    public String viewEmployee(@PathVariable Long id, HttpSession session, Model model) {
+        if (!canAccess(session)) return "redirect:/employees/list";
+        try {
+            Employee employee = employeeService.getEmployeeById(id);
+            model.addAttribute("employee", employee);
+        } catch (RuntimeException e) {
+            model.addAttribute("error", "Employee not found");
+        }
+        return "viewEmployee";
+    }
+
+    // ========================= DEPARTMENTS =========================
     @GetMapping("/departments/list")
     public String listDepartments(HttpSession session, Model model) {
         session.setAttribute("fromList", true);
@@ -91,8 +107,15 @@ public class WebController {
     }
 
     @GetMapping("/departments/add")
-    public String addDepartment(HttpSession session) {
-        return canAccess(session) ? "addDepartment" : "redirect:/departments/list";
+    public String addDepartment(Model model) {
+        model.addAttribute("department", new Department());
+        return "addDepartment";
+    }
+
+    @PostMapping("/departments/add")
+    public String saveDepartment(@ModelAttribute Department department) {
+        departmentService.saveDepartment(department);
+        return "redirect:/departments/list";
     }
 
     @GetMapping("/departments/edit/{id}")
@@ -102,10 +125,6 @@ public class WebController {
         model.addAttribute("department", department);
         return "editDepartment";
     }
-    @GetMapping("/departments/view")
-    public String viewDepartment(HttpSession session) {
-        return canAccess(session) ? "viewDepartment" : "redirect:/departments/list";
-    }
 
     @PostMapping("/departments/update/{id}")
     public String updateDepartment(@PathVariable Long id, @ModelAttribute Department department) {
@@ -113,7 +132,24 @@ public class WebController {
         return "redirect:/departments/list";
     }
 
-    // ATTENDANCE
+    @GetMapping("/departments/view")
+    public String viewDepartment(HttpSession session) {
+        return canAccess(session) ? "viewDepartment" : "redirect:/departments/list";
+    }
+
+    @GetMapping("/departments/view/{id}")
+    public String viewDepartment(@PathVariable Long id, HttpSession session, Model model) {
+        if (!canAccess(session)) return "redirect:/departments/list";
+        try {
+            Department department = departmentService.getDepartmentById(id);
+            model.addAttribute("department", department);
+        } catch (RuntimeException e) {
+            model.addAttribute("error", "Department not found");
+        }
+        return "viewDepartment";
+    }
+
+    // ========================= ATTENDANCE =========================
     @GetMapping("/attendance/list")
     public String listAttendance(HttpSession session, Model model) {
         session.setAttribute("fromList", true);
@@ -123,8 +159,17 @@ public class WebController {
     }
 
     @GetMapping("/attendance/add")
-    public String addAttendance(HttpSession session) {
-        return canAccess(session) ? "recordAttendance" : "redirect:/attendance/list";
+    public String addAttendance(Model model) {
+        List<Employee> employees = employeeService.getAllEmployees();
+        model.addAttribute("employees", employees);
+        model.addAttribute("attendance", new Attendance());
+        return "recordAttendance";
+    }
+
+    @PostMapping("/attendance/add")
+    public String saveAttendance(@ModelAttribute Attendance attendance) {
+        attendanceService.saveAttendance(attendance);
+        return "redirect:/attendance/list";
     }
 
     @GetMapping("/attendance/edit/{id}")
@@ -137,51 +182,20 @@ public class WebController {
         return "editAttendance";
     }
 
-    @GetMapping("/attendance/view")
-    public String viewAttendance(HttpSession session) {
-        return canAccess(session) ? "viewAttendance" : "redirect:/attendance/list";
-    }
-
     @PostMapping("/attendance/update/{id}")
     public String updateAttendance(@PathVariable Long id, @ModelAttribute Attendance attendance) {
         attendanceService.updateAttendance(id, attendance);
         return "redirect:/attendance/list";
     }
 
-    // View methods with ID parameters
-    @GetMapping("/employees/view/{id}")
-    public String viewEmployee(@PathVariable Long id, HttpSession session, Model model) {
-        if (!canAccess(session)) {
-            return "redirect:/employees/list";
-        }
-        try {
-            Employee employee = employeeService.getEmployeeById(id);
-            model.addAttribute("employee", employee);
-        } catch (RuntimeException e) {
-            model.addAttribute("error", "Employee not found");
-        }
-        return "viewEmployee";
-    }
-
-    @GetMapping("/departments/view/{id}")
-    public String viewDepartment(@PathVariable Long id, HttpSession session, Model model) {
-        if (!canAccess(session)) {
-            return "redirect:/departments/list";
-        }
-        try {
-            Department department = departmentService.getDepartmentById(id);
-            model.addAttribute("department", department);
-        } catch (RuntimeException e) {
-            model.addAttribute("error", "Department not found");
-        }
-        return "viewDepartment";
+    @GetMapping("/attendance/view")
+    public String viewAttendance(HttpSession session) {
+        return canAccess(session) ? "viewAttendance" : "redirect:/attendance/list";
     }
 
     @GetMapping("/attendance/view/{id}")
     public String viewAttendance(@PathVariable Long id, HttpSession session, Model model) {
-        if (!canAccess(session)) {
-            return "redirect:/attendance/list";
-        }
+        if (!canAccess(session)) return "redirect:/attendance/list";
         try {
             Attendance attendance = attendanceService.getAttendanceById(id);
             model.addAttribute("attendance", attendance);
