@@ -515,11 +515,12 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2023 Employee Management System. All rights reserved.</p>
+            <p>&copy; 2025 Employee Management System. All rights reserved.</p>
             <p>Streamlining workforce management for modern businesses</p>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
