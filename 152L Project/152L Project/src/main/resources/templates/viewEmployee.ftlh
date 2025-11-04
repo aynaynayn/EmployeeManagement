@@ -31,14 +31,15 @@
 
         /* Header Styles */
         .header {
-            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-            color: white;
-            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .header h1 {
             font-weight: 600;
-            font-size: 1.8rem;
+            font-size: 2rem;
             margin: 0;
         }
 
@@ -60,6 +61,7 @@
             color: var(--secondary-color);
             font-weight: 600;
             margin: 0;
+            font-size: 1.5rem;
         }
 
         .section-subheader {
@@ -151,7 +153,7 @@
         }
 
         .data-table thead {
-            background-color: var(--secondary-color);
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
             color: white;
         }
 

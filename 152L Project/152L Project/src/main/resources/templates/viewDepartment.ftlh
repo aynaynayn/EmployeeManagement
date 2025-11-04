@@ -31,24 +31,22 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #ecf0f3;
             min-height: 100vh;
             color: #333;
             line-height: 1.6;
         }
 
         .header {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            color: white;
             padding: 1.5rem 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .header h1 {
             font-weight: 600;
-            font-size: 1.8rem;
+            font-size: 2rem;
             margin: 0;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
@@ -58,14 +56,14 @@
         }
 
         .content-card {
-            background: rgba(255, 255, 255, 0.95);
+            background: #ecf0f3;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border-radius: var(--border-radius);
             padding: 2.5rem;
             margin: 0 auto;
             max-width: 1400px;
-            box-shadow: var(--shadow-lg);
+            box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
@@ -82,7 +80,7 @@
             color: var(--secondary-color);
             font-weight: 600;
             margin: 0;
-            font-size: 2.2rem;
+            font-size: 1.5rem;
         }
 
         .action-buttons .btn {
@@ -129,14 +127,8 @@
             border-radius: var(--border-radius);
             padding: 2rem;
             margin-bottom: 2rem;
-            box-shadow: var(--shadow);
             border: 1px solid rgba(255, 255, 255, 0.3);
             transition: var(--transition);
-        }
-
-        .details-card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
         }
 
         .detail-row {
@@ -320,7 +312,6 @@
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            color: white;
             text-align: center;
             padding: 2rem;
             margin-top: 3rem;

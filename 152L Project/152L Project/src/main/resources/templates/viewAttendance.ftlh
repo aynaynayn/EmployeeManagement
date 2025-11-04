@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>View Attendance - Employee Management System</title>
+    <title>View Department - Employee Management System</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* View Attendance Styles - Glass Morphism Theme */
+        /* View Department Styles - Glass Morphism Theme */
         :root {
             --primary-color: #3498db;
             --secondary-color: #2c3e50;
@@ -31,24 +31,22 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #ecf0f3;
             min-height: 100vh;
             color: #333;
             line-height: 1.6;
         }
 
         .header {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            color: white;
             padding: 1.5rem 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .header h1 {
             font-weight: 600;
-            font-size: 1.8rem;
+            font-size: 2rem;
             margin: 0;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
@@ -58,14 +56,14 @@
         }
 
         .content-card {
-            background: rgba(255, 255, 255, 0.95);
+            background: #ecf0f3;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border-radius: var(--border-radius);
             padding: 2.5rem;
             margin: 0 auto;
-            max-width: 1200px;
-            box-shadow: var(--shadow-lg);
+            max-width: 1400px;
+            box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
@@ -82,7 +80,7 @@
             color: var(--secondary-color);
             font-weight: 600;
             margin: 0;
-            font-size: 2.2rem;
+            font-size: 1.5rem;
         }
 
         .action-buttons .btn {
@@ -122,26 +120,20 @@
             color: white;
         }
 
-        /* Attendance Details Card */
+        /* Department Details Card */
         .details-card {
             background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(5px);
             border-radius: var(--border-radius);
             padding: 2rem;
             margin-bottom: 2rem;
-            box-shadow: var(--shadow);
             border: 1px solid rgba(255, 255, 255, 0.3);
             transition: var(--transition);
         }
 
-        .details-card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-
         .detail-row {
             display: flex;
-            padding: 1.25rem 0;
+            padding: 1rem 0;
             border-bottom: 1px solid rgba(222, 226, 230, 0.5);
             align-items: center;
         }
@@ -153,7 +145,7 @@
         .detail-label {
             font-weight: 600;
             color: var(--secondary-color);
-            width: 220px;
+            width: 200px;
             flex-shrink: 0;
             font-size: 1.1rem;
         }
@@ -164,7 +156,7 @@
             font-size: 1.1rem;
         }
 
-        .attendance-id {
+        .department-id {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -173,105 +165,114 @@
             font-size: 1.2rem;
         }
 
-        .employee-info-card {
-            background: linear-gradient(135deg, rgba(52, 152, 219, 0.05), rgba(41, 128, 185, 0.1));
-            border-radius: var(--border-radius);
-            padding: 1.5rem;
-            margin-top: 1rem;
+        .department-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+
+        .employee-count {
+            background: linear-gradient(135deg, var(--success-color), #229954);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+
+        /* Section Subheader */
+        .section-subheader {
+            margin-bottom: 1.5rem;
+            padding-left: 1rem;
             border-left: 4px solid var(--primary-color);
         }
 
-        .employee-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
+        .section-subheader h4 {
+            color: var(--secondary-color);
+            font-weight: 600;
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        /* Table Styles */
+        .table-container {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(5px);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0;
+        }
+
+        .data-table thead {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+        }
+
+        .data-table th {
+            padding: 1.25rem 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: white;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .data-table tbody tr {
+            border-bottom: 1px solid rgba(222, 226, 230, 0.5);
+            transition: var(--transition);
+        }
+
+        .data-table tbody tr:hover {
+            background: rgba(52, 152, 219, 0.08);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .data-table td {
+            padding: 1.25rem 1rem;
+            color: var(--dark-color);
+            vertical-align: middle;
         }
 
         .employee-avatar {
-            width: 60px;
-            height: 60px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-weight: 700;
-            font-size: 1.5rem;
-            margin-right: 1.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-right: 1rem;
+        }
+
+        .employee-info {
+            display: flex;
+            align-items: center;
         }
 
         .employee-details {
-            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .employee-name {
-            font-size: 1.4rem;
-            font-weight: 700;
+            font-weight: 600;
             color: var(--secondary-color);
-            margin-bottom: 0.25rem;
         }
 
-        .employee-position {
-            color: var(--primary-color);
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        .employee-department {
-            background: linear-gradient(135deg, var(--success-color), #229954);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 600;
-        }
-
-        /* Status Badges */
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.75rem 1.5rem;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border: 2px solid transparent;
-            gap: 0.5rem;
-        }
-
-        .status-present {
-            background: linear-gradient(135deg, rgba(39, 174, 96, 0.15), rgba(39, 174, 96, 0.25));
-            color: var(--success-color);
-            border-color: rgba(39, 174, 96, 0.3);
-        }
-
-        .status-absent {
-            background: linear-gradient(135deg, rgba(231, 76, 60, 0.15), rgba(231, 76, 60, 0.25));
-            color: var(--danger-color);
-            border-color: rgba(231, 76, 60, 0.3);
-        }
-
-        .status-late {
-            background: linear-gradient(135deg, rgba(243, 156, 18, 0.15), rgba(243, 156, 18, 0.25));
-            color: var(--warning-color);
-            border-color: rgba(243, 156, 18, 0.3);
-        }
-
-        .status-other {
-            background: linear-gradient(135deg, rgba(108, 117, 125, 0.15), rgba(108, 117, 125, 0.25));
+        .employee-email {
+            font-size: 0.9rem;
             color: #6c757d;
-            border-color: rgba(108, 117, 125, 0.3);
-        }
-
-        /* Date Styling */
-        .attendance-date {
-            background: linear-gradient(135deg, #9b59b6, #8e44ad);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 700;
-            font-size: 1.2rem;
         }
 
         /* Alert Styles */
@@ -290,11 +291,27 @@
             border-left: 4px solid var(--warning-color);
         }
 
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: #6c757d;
+        }
+
+        .empty-icon {
+            font-size: 4rem;
+            opacity: 0.5;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
         .footer {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            color: white;
             text-align: center;
             padding: 2rem;
             margin-top: 3rem;
@@ -334,19 +351,22 @@
                 margin-bottom: 0.5rem;
             }
 
-            .employee-header {
+            .table-container {
+                overflow-x: auto;
+            }
+
+            .data-table {
+                min-width: 600px;
+            }
+
+            .employee-info {
                 flex-direction: column;
-                text-align: center;
+                align-items: flex-start;
             }
 
             .employee-avatar {
+                margin-bottom: 0.5rem;
                 margin-right: 0;
-                margin-bottom: 1rem;
-            }
-
-            .status-badge {
-                padding: 0.6rem 1.2rem;
-                font-size: 0.9rem;
             }
         }
 
@@ -363,14 +383,10 @@
                 padding: 1.5rem;
             }
 
-            .employee-avatar {
-                width: 50px;
-                height: 50px;
-                font-size: 1.2rem;
-            }
-
-            .employee-name {
-                font-size: 1.2rem;
+            .data-table th,
+            .data-table td {
+                padding: 0.75rem 0.5rem;
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -388,125 +404,106 @@
             <!-- Section Header -->
             <div class="section-header">
                 <h2>
-                    <i class="fas fa-clipboard-check me-2"></i>
-                    Attendance Record Details
+                    <i class="fas fa-building me-2"></i>
+                    Department Details
                 </h2>
                 <div class="action-buttons">
-                    <a href="/attendance/list" class="btn btn-outline-secondary">
+                    <a href="/departments/list" class="btn btn-outline-secondary">
                         <i class="fas fa-arrow-left me-1"></i>
                         Back to List
                     </a>
-                    <a href="/attendance/edit" class="btn btn-primary ms-2">
+                    <a href="/departments/edit" class="btn btn-primary ms-2">
                         <i class="fas fa-edit me-1"></i>
-                        Edit Attendance
+                        Edit Department
                     </a>
                 </div>
             </div>
 
-            <#if attendance??>
-                <!-- Attendance Details Card -->
+            <#if department??>
+                <!-- Department Details Card -->
                 <div class="details-card">
                     <div class="detail-row">
                         <div class="detail-label">
                             <i class="fas fa-id-card me-2"></i>
-                            Attendance ID:
+                            Department ID:
                         </div>
-                        <div class="detail-value attendance-id">#${attendance.id}</div>
+                        <div class="detail-value department-id">#${department.id}</div>
                     </div>
-
                     <div class="detail-row">
                         <div class="detail-label">
-                            <i class="fas fa-user me-2"></i>
-                            Employee:
+                            <i class="fas fa-signature me-2"></i>
+                            Department Name:
                         </div>
-                        <div class="detail-value">
-                            <#if attendance.employee??>
-                                ${attendance.employee.name!''}
-                            <#else>
-                                <span class="text-muted">No employee assigned</span>
-                            </#if>
-                        </div>
+                        <div class="detail-value department-name">${department.name}</div>
                     </div>
-
                     <div class="detail-row">
                         <div class="detail-label">
-                            <i class="fas fa-calendar-day me-2"></i>
-                            Date:
+                            <i class="fas fa-users me-2"></i>
+                            Employee Count:
                         </div>
-                        <div class="detail-value attendance-date">
-                            <i class="fas fa-calendar-alt me-2"></i>
-                            ${attendance.date}
-                        </div>
-                    </div>
-
-                    <div class="detail-row">
-                        <div class="detail-label">
-                            <i class="fas fa-user-clock me-2"></i>
-                            Status:
-                        </div>
-                        <div class="detail-value">
-                            <#if attendance.status == 'Present'>
-                                <span class="status-badge status-present">
-                                    <i class="fas fa-check-circle"></i>
-                                    Present
-                                </span>
-                            <#elseif attendance.status == 'Absent'>
-                                <span class="status-badge status-absent">
-                                    <i class="fas fa-times-circle"></i>
-                                    Absent
-                                </span>
-                            <#elseif attendance.status == 'Late'>
-                                <span class="status-badge status-late">
-                                    <i class="fas fa-clock"></i>
-                                    Late
-                                </span>
-                            <#else>
-                                <span class="status-badge status-other">
-                                    <i class="fas fa-question-circle"></i>
-                                    ${attendance.status}
-                                </span>
-                            </#if>
+                        <div class="detail-value employee-count">
+                            ${department.employees?size}
+                            <span class="text-muted" style="font-size: 1rem;">employees</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Employee Information Card -->
-                <#if attendance.employee??>
-                    <div class="employee-info-card">
-                        <div class="employee-header">
-                            <div class="employee-avatar">
-                                ${attendance.employee.name!''?substring(0,1)?upper_case}
-                            </div>
-                            <div class="employee-details">
-                                <div class="employee-name">${attendance.employee.name!''}</div>
-                                <div class="employee-position">
-                                    <i class="fas fa-briefcase me-1"></i>
-                                    ${attendance.employee.position!''}
-                                </div>
-                            </div>
+                <!-- Employees in Department Section -->
+                <#if department.employees?? && department.employees?has_content>
+                    <div class="section-subheader">
+                        <h4>
+                            <i class="fas fa-user-friends me-2"></i>
+                            Employees in this Department
+                        </h4>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Employee</th>
+                                    <th>Position</th>
+                                    <th>Email</th>
+                                    <th>Date Hired</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <#list department.employees as employee>
+                                <tr>
+                                    <td>
+                                        <div class="employee-info">
+                                            <div class="employee-avatar">
+                                                ${employee.name?substring(0,1)?upper_case}
+                                            </div>
+                                            <div class="employee-details">
+                                                <span class="employee-name">${employee.name}</span>
+                                                <span class="employee-email">${employee.email}</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-primary">${employee.position}</span>
+                                    </td>
+                                    <td>${employee.email}</td>
+                                    <td>
+                                        <i class="fas fa-calendar-alt me-1 text-muted"></i>
+                                        ${employee.dateHired}
+                                    </td>
+                                </tr>
+                                </#list>
+                            </tbody>
+                        </table>
+                    </div>
+                <#else>
+                    <div class="empty-state">
+                        <div class="empty-icon">
+                            <i class="fas fa-users"></i>
                         </div>
-
-                        <div class="detail-row" style="border-bottom: none; padding: 0.5rem 0;">
-                            <div class="detail-label">
-                                <i class="fas fa-building me-2"></i>
-                                Department:
-                            </div>
-                            <div class="detail-value employee-department">
-                                ${attendance.employee.department.name!''}
-                            </div>
-                        </div>
-
-                        <#if attendance.employee.email??>
-                        <div class="detail-row" style="border-bottom: none; padding: 0.5rem 0;">
-                            <div class="detail-label">
-                                <i class="fas fa-envelope me-2"></i>
-                                Email:
-                            </div>
-                            <div class="detail-value">
-                                ${attendance.employee.email}
-                            </div>
-                        </div>
-                        </#if>
+                        <h4>No Employees in this Department</h4>
+                        <p class="mt-2">This department currently has no assigned employees.</p>
+                        <a href="/employees/add" class="btn btn-primary mt-3">
+                            <i class="fas fa-user-plus me-1"></i>
+                            Add New Employee
+                        </a>
                     </div>
                 </#if>
             <#else>
@@ -514,8 +511,8 @@
                     <div class="d-flex align-items-center">
                         <i class="fas fa-exclamation-triangle me-3 fs-4"></i>
                         <div>
-                            <h5 class="alert-heading mb-2">No Attendance Record Found</h5>
-                            <p class="mb-0">The requested attendance record could not be found or has been removed.</p>
+                            <h5 class="alert-heading mb-2">No Department Data Found</h5>
+                            <p class="mb-0">The requested department could not be found or has been removed.</p>
                         </div>
                     </div>
                 </div>
